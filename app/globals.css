@@ -39,6 +39,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -46,11 +47,19 @@ body {
   color: var(--forest);
   font-family: var(--font-body);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
   background: var(--olive);
   color: var(--cream);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--gold2);
+  outline-offset: 2px;
 }
 
 /* Custom scrollbar */
@@ -63,6 +72,15 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--sage);
   border-radius: 3px;
+}
+
+/* Hide scrollbar for horizontal scroll areas */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Custom cursor - desktop only */
@@ -88,4 +106,18 @@ body {
 .scroll-progress {
   transform-origin: left;
   will-change: transform;
+}
+
+/* Safe area insets for iPhone notch */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Touch highlight removal */
+@media (hover: none) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://medley-argenteuil.fr"),
   title: "MÉDLËY Argenteuil — Restaurant 4 Cuisines | Top Chef Mohamed Si",
   description:
     "MÉDLËY, restaurant premium à Argenteuil. 4 cuisines du monde (Orient, Asian, Brasserie, Italy) par le Chef Mohamed Si, révélé dans Top Chef France. Ouverture 15 avril 2026. Réservation en ligne.",

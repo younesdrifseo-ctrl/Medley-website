@@ -56,18 +56,23 @@ export default function Countdown() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <p className="font-body text-xs tracking-[0.3em] uppercase text-cream/50">
+      <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/50">
         Ouverture dans
       </p>
-      <div className="flex items-center gap-3 md:gap-5">
-        {units.map(([label, value]) => (
+      <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
+        {units.map(([label, value], i) => (
           <div key={label} className="flex flex-col items-center">
-            <span className="font-mono text-3xl md:text-5xl text-cream tabular-nums">
-              {String(value).padStart(2, "0")}
-            </span>
-            <span className="font-mono text-[10px] md:text-xs text-cream/40 uppercase tracking-wider mt-1">
+            <div className="relative">
+              <span className="font-mono text-2xl sm:text-3xl md:text-5xl text-cream tabular-nums leading-none">
+                {String(value).padStart(2, "0")}
+              </span>
+            </div>
+            <span className="font-mono text-[9px] sm:text-[10px] md:text-xs text-cream/40 uppercase tracking-wider mt-1.5">
               {label}
             </span>
+            {i < units.length - 1 && (
+              <span className="sr-only">,</span>
+            )}
           </div>
         ))}
       </div>

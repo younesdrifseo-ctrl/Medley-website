@@ -19,8 +19,10 @@ function FloatingButtons() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      setShowReserve(scrollPercent > 0.7);
+      const total = document.body.scrollHeight - window.innerHeight;
+      if (total > 0) {
+        setShowReserve(window.scrollY / total > 0.7);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -28,13 +30,13 @@ function FloatingButtons() {
 
   return (
     <>
-      {/* Mobile call button */}
+      {/* Mobile call button - bottom left, safe area */}
       <a
         href={`tel:${RESTAURANT.phoneIntl}`}
-        className="md:hidden fixed bottom-6 left-6 z-50 w-14 h-14 bg-olive text-cream rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform"
+        className="lg:hidden fixed bottom-6 left-4 sm:left-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-olive text-cream rounded-full flex items-center justify-center shadow-lg shadow-olive/20 active:scale-95 transition-transform"
         aria-label="Appeler MÉDLËY"
       >
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -44,12 +46,12 @@ function FloatingButtons() {
         </svg>
       </a>
 
-      {/* Floating reserve button */}
+      {/* Floating reserve button - appears after 70% scroll */}
       <AnimatePresence>
         {showReserve && (
           <motion.a
             href="#reservation"
-            className="fixed bottom-6 right-6 z-50 px-6 py-3 bg-gold2 text-deep font-body text-sm tracking-widest uppercase rounded-sm shadow-lg hover:bg-gold transition-colors"
+            className="fixed bottom-6 right-4 sm:right-6 z-50 px-5 py-2.5 sm:px-6 sm:py-3 bg-gold2 text-deep font-body text-xs sm:text-sm tracking-widest uppercase rounded-sm shadow-lg shadow-gold/20 hover:bg-gold transition-colors active:scale-95"
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}

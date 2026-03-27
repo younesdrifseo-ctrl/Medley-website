@@ -21,25 +21,30 @@ export default function Cuisines() {
             <div className={`absolute inset-0 ${isEven ? "opacity-[0.06]" : "opacity-[0.15]"}`}>
               <Image
                 src={cuisine.image}
-                alt={cuisine.name}
+                alt=""
                 fill
+                sizes="100vw"
                 className="object-cover"
+                aria-hidden="true"
               />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32 w-full">
-              <div className={`grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center ${
-                !isEven ? "md:grid-flow-dense" : ""
-              }`}>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-24 md:py-32 w-full">
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center ${
+                  !isEven ? "lg:[direction:rtl]" : ""
+                }`}
+              >
                 {/* Text side */}
-                <div className={!isEven ? "md:col-start-2" : ""}>
+                <div className={!isEven ? "[direction:ltr]" : ""}>
                   {/* Icon */}
                   <RevealOnScroll>
-                    <div className="relative w-16 h-16 md:w-20 md:h-20 mb-6">
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mb-4 sm:mb-6">
                       <Image
                         src={cuisine.icon}
                         alt={`Icône ${cuisine.name}`}
                         fill
+                        sizes="80px"
                         className="object-contain"
                         style={
                           isEven
@@ -53,7 +58,7 @@ export default function Cuisines() {
                   {/* Number */}
                   <RevealOnScroll delay={0.08}>
                     <span
-                      className={`font-mono text-sm tracking-[0.3em] ${
+                      className={`font-mono text-xs sm:text-sm tracking-[0.3em] ${
                         isEven ? "text-olive/60" : "text-cream/40"
                       }`}
                     >
@@ -64,7 +69,7 @@ export default function Cuisines() {
                   {/* Name */}
                   <RevealOnScroll delay={0.16}>
                     <h2
-                      className={`font-display italic text-5xl md:text-7xl font-light mt-2 mb-4 ${
+                      className={`font-display italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mt-2 mb-3 sm:mb-4 ${
                         isEven ? "text-forest" : "text-cream"
                       }`}
                     >
@@ -75,7 +80,7 @@ export default function Cuisines() {
                   {/* Tagline */}
                   <RevealOnScroll delay={0.24}>
                     <p
-                      className={`font-display italic text-xl mb-6 ${
+                      className={`font-display italic text-lg sm:text-xl mb-4 sm:mb-6 ${
                         isEven ? "text-sage2" : "text-sage"
                       }`}
                     >
@@ -86,7 +91,7 @@ export default function Cuisines() {
                   {/* Description */}
                   <RevealOnScroll delay={0.32}>
                     <p
-                      className={`font-body text-base leading-relaxed mb-8 max-w-md ${
+                      className={`font-body text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md ${
                         isEven ? "text-forest/70" : "text-cream/60"
                       }`}
                     >
@@ -95,7 +100,7 @@ export default function Cuisines() {
                   </RevealOnScroll>
 
                   {/* Dishes */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 sm:space-y-3">
                     {cuisine.dishes.map((dish, i) => (
                       <RevealOnScroll key={dish} delay={0.4 + i * 0.08}>
                         <div
@@ -104,7 +109,7 @@ export default function Cuisines() {
                           }`}
                         >
                           <span
-                            className="w-6 h-px"
+                            className="w-6 h-px flex-shrink-0"
                             style={{ background: cuisine.color }}
                           />
                           {dish}
@@ -118,17 +123,18 @@ export default function Cuisines() {
                 <RevealOnScroll
                   direction={isEven ? "right" : "left"}
                   delay={0.2}
-                  className={!isEven ? "md:col-start-1 md:row-start-1" : ""}
+                  className={!isEven ? "[direction:ltr]" : ""}
                 >
                   <motion.div
-                    className="relative aspect-[4/5] rounded-sm overflow-hidden"
+                    className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-sm overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                   >
                     <Image
                       src={cuisine.image}
-                      alt={cuisine.name}
+                      alt={`${cuisine.name} — ${cuisine.tagline}`}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
                     />
                     <div
@@ -136,9 +142,15 @@ export default function Cuisines() {
                       style={{
                         background: `linear-gradient(to top, ${
                           isEven ? "rgba(30,45,18,0.3)" : "rgba(30,45,18,0.5)"
-                        }, transparent)`,
+                        }, transparent 60%)`,
                       }}
                     />
+                    {/* Cuisine label on image */}
+                    <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
+                      <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/60">
+                        {cuisine.number} — {cuisine.name}
+                      </span>
+                    </div>
                   </motion.div>
                 </RevealOnScroll>
               </div>
