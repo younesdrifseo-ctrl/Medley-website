@@ -1,10 +1,15 @@
 [build]
   command = "npm run build"
   publish = "out"
-  framework = "#static"
+  ignore = "false"
 
 [build.environment]
   NODE_VERSION = "18"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_PRIVATE_STANDALONE = "false"
+
+[dev]
+  framework = "#static"
 
 [[headers]]
   for = "/assets/*"
