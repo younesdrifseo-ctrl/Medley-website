@@ -93,13 +93,13 @@ export default function Hero() {
         >
           <a
             href="#reservation"
-            className="px-8 py-3 bg-olive text-cream font-body text-sm tracking-widest uppercase rounded-sm hover:bg-forest transition-colors duration-300 text-center active:scale-97"
+            className="px-8 py-3 bg-olive text-cream font-body text-sm tracking-widest uppercase rounded-sm hover:bg-forest transition-colors duration-300 text-center active:scale-95"
           >
             Réserver une table
           </a>
           <a
             href="#cuisines"
-            className="px-8 py-3 border border-cream/30 text-cream font-body text-sm tracking-widest uppercase rounded-sm hover:bg-cream/10 transition-colors duration-300 text-center active:scale-97"
+            className="px-8 py-3 border border-cream/30 text-cream font-body text-sm tracking-widest uppercase rounded-sm hover:bg-cream/10 transition-colors duration-300 text-center active:scale-95"
           >
             Découvrir
           </a>

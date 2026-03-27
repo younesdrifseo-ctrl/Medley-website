@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-cream: #F0EBE0;
+  --color-cream2: #E4DDCF;
+  --color-sage: #8B9A6B;
+  --color-sage2: #6B7A50;
+  --color-olive: #5A6B3A;
+  --color-forest: #3A4A28;
+  --color-deep: #1E2D12;
+  --color-gold: #B8A455;
+  --color-gold2: #D4B840;
+  --color-ink: #1C2010;
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
 :root {
   --cream: #F0EBE0;
   --cream2: #E4DDCF;
@@ -11,24 +27,6 @@
   --gold: #B8A455;
   --gold2: #D4B840;
   --ink: #1C2010;
-  --background: var(--cream);
-  --foreground: var(--forest);
-}
-
-@theme inline {
-  --color-cream: var(--cream);
-  --color-cream2: var(--cream2);
-  --color-sage: var(--sage);
-  --color-sage2: var(--sage2);
-  --color-olive: var(--olive);
-  --color-forest: var(--forest);
-  --color-deep: var(--deep);
-  --color-gold: var(--gold);
-  --color-gold2: var(--gold2);
-  --color-ink: var(--ink);
-  --font-display: "Cormorant Garamond", serif;
-  --font-body: "Space Grotesk", sans-serif;
-  --font-mono: "DM Mono", monospace;
 }
 
 * {
