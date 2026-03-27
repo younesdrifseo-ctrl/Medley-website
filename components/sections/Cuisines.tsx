@@ -29,17 +29,13 @@ export default function Cuisines() {
               />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-24 md:py-32 w-full">
-              <div
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center ${
-                  !isEven ? "lg:[direction:rtl]" : ""
-                }`}
-              >
+            <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 py-20 sm:py-24 md:py-32 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
                 {/* Text side */}
-                <div className={!isEven ? "[direction:ltr]" : ""}>
+                <div>
                   {/* Icon */}
                   <RevealOnScroll>
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mb-4 sm:mb-6">
+                    <div className="relative w-16 h-16 sm:w-18 md:w-20 md:h-20 mb-5 sm:mb-6">
                       <Image
                         src={cuisine.icon}
                         alt={`Icône ${cuisine.name}`}
@@ -58,7 +54,7 @@ export default function Cuisines() {
                   {/* Number */}
                   <RevealOnScroll delay={0.08}>
                     <span
-                      className={`font-mono text-xs sm:text-sm tracking-[0.3em] ${
+                      className={`font-mono text-xs sm:text-sm tracking-[0.3em] block ${
                         isEven ? "text-olive/60" : "text-cream/40"
                       }`}
                     >
@@ -69,7 +65,7 @@ export default function Cuisines() {
                   {/* Name */}
                   <RevealOnScroll delay={0.16}>
                     <h2
-                      className={`font-display italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mt-2 mb-3 sm:mb-4 ${
+                      className={`font-display italic text-5xl sm:text-6xl lg:text-7xl font-light mt-2 mb-3 sm:mb-4 ${
                         isEven ? "text-forest" : "text-cream"
                       }`}
                     >
@@ -100,7 +96,7 @@ export default function Cuisines() {
                   </RevealOnScroll>
 
                   {/* Dishes */}
-                  <div className="space-y-2 sm:space-y-3">
+                  <div className="space-y-3">
                     {cuisine.dishes.map((dish, i) => (
                       <RevealOnScroll key={dish} delay={0.4 + i * 0.08}>
                         <div
@@ -119,14 +115,14 @@ export default function Cuisines() {
                   </div>
                 </div>
 
-                {/* Image side */}
+                {/* Image side — on odd sections, show image first on desktop */}
                 <RevealOnScroll
                   direction={isEven ? "right" : "left"}
                   delay={0.2}
-                  className={!isEven ? "[direction:ltr]" : ""}
+                  className={!isEven ? "lg:order-first" : ""}
                 >
                   <motion.div
-                    className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] rounded-sm overflow-hidden"
+                    className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-[4/5] rounded-sm overflow-hidden"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                   >
@@ -141,13 +137,12 @@ export default function Cuisines() {
                       className="absolute inset-0"
                       style={{
                         background: `linear-gradient(to top, ${
-                          isEven ? "rgba(30,45,18,0.3)" : "rgba(30,45,18,0.5)"
+                          isEven ? "rgba(30,45,18,0.4)" : "rgba(30,45,18,0.5)"
                         }, transparent 60%)`,
                       }}
                     />
-                    {/* Cuisine label on image */}
                     <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
-                      <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/60">
+                      <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/70">
                         {cuisine.number} — {cuisine.name}
                       </span>
                     </div>
