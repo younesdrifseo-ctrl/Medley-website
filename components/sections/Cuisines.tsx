@@ -17,8 +17,8 @@ export default function Cuisines() {
               isEven ? "bg-cream" : "bg-deep"
             }`}
           >
-            {/* Background image */}
-            <div className={`absolute inset-0 ${isEven ? "opacity-[0.06]" : "opacity-[0.15]"}`}>
+            {/* Subtle background image */}
+            <div className={`absolute inset-0 ${isEven ? "opacity-[0.04]" : "opacity-[0.12]"}`}>
               <Image
                 src={cuisine.image}
                 alt=""
@@ -29,13 +29,22 @@ export default function Cuisines() {
               />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 py-20 sm:py-24 md:py-32 w-full">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
+            {/* Decorative gradient accent */}
+            <div
+              className={`absolute inset-0 ${
+                isEven
+                  ? "bg-gradient-to-br from-transparent via-transparent to-sage/5"
+                  : "bg-gradient-to-br from-transparent via-transparent to-gold/5"
+              }`}
+            />
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 sm:py-28 md:py-36 w-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
                 {/* Text side */}
                 <div>
                   {/* Icon */}
                   <RevealOnScroll>
-                    <div className="relative w-16 h-16 sm:w-18 md:w-20 md:h-20 mb-5 sm:mb-6">
+                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 mb-6 sm:mb-8">
                       <Image
                         src={cuisine.icon}
                         alt={`Icône ${cuisine.name}`}
@@ -54,8 +63,8 @@ export default function Cuisines() {
                   {/* Number */}
                   <RevealOnScroll delay={0.08}>
                     <span
-                      className={`font-mono text-xs sm:text-sm tracking-[0.3em] block ${
-                        isEven ? "text-olive/60" : "text-cream/40"
+                      className={`font-mono text-[10px] sm:text-xs tracking-[0.4em] uppercase block mb-2 ${
+                        isEven ? "text-olive/50" : "text-cream/30"
                       }`}
                     >
                       {cuisine.number}
@@ -65,7 +74,7 @@ export default function Cuisines() {
                   {/* Name */}
                   <RevealOnScroll delay={0.16}>
                     <h2
-                      className={`font-display italic text-5xl sm:text-6xl lg:text-7xl font-light mt-2 mb-3 sm:mb-4 ${
+                      className={`font-display italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-3 sm:mb-4 ${
                         isEven ? "text-forest" : "text-cream"
                       }`}
                     >
@@ -76,7 +85,7 @@ export default function Cuisines() {
                   {/* Tagline */}
                   <RevealOnScroll delay={0.24}>
                     <p
-                      className={`font-display italic text-lg sm:text-xl mb-4 sm:mb-6 ${
+                      className={`font-display italic text-base sm:text-lg md:text-xl mb-5 sm:mb-7 ${
                         isEven ? "text-sage2" : "text-sage"
                       }`}
                     >
@@ -84,11 +93,19 @@ export default function Cuisines() {
                     </p>
                   </RevealOnScroll>
 
+                  {/* Decorative line */}
+                  <RevealOnScroll delay={0.28}>
+                    <div
+                      className="w-10 h-px mb-5 sm:mb-7"
+                      style={{ background: cuisine.color }}
+                    />
+                  </RevealOnScroll>
+
                   {/* Description */}
                   <RevealOnScroll delay={0.32}>
                     <p
-                      className={`font-body text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md ${
-                        isEven ? "text-forest/70" : "text-cream/60"
+                      className={`font-body text-sm sm:text-base leading-relaxed mb-8 sm:mb-10 max-w-md ${
+                        isEven ? "text-forest/60" : "text-cream/50"
                       }`}
                     >
                       {cuisine.description}
@@ -96,16 +113,16 @@ export default function Cuisines() {
                   </RevealOnScroll>
 
                   {/* Dishes */}
-                  <div className="space-y-3">
+                  <div className="space-y-3 sm:space-y-4">
                     {cuisine.dishes.map((dish, i) => (
                       <RevealOnScroll key={dish} delay={0.4 + i * 0.08}>
                         <div
-                          className={`flex items-center gap-3 font-body text-sm ${
-                            isEven ? "text-forest/60" : "text-cream/50"
+                          className={`flex items-center gap-4 font-body text-sm sm:text-base ${
+                            isEven ? "text-forest/55" : "text-cream/45"
                           }`}
                         >
                           <span
-                            className="w-6 h-px flex-shrink-0"
+                            className="w-8 h-px flex-shrink-0"
                             style={{ background: cuisine.color }}
                           />
                           {dish}
@@ -122,7 +139,7 @@ export default function Cuisines() {
                   className={!isEven ? "lg:order-first" : ""}
                 >
                   <motion.div
-                    className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-[4/5] rounded-sm overflow-hidden"
+                    className="relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-[4/5] rounded-sm overflow-hidden shadow-2xl"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                   >
@@ -137,12 +154,12 @@ export default function Cuisines() {
                       className="absolute inset-0"
                       style={{
                         background: `linear-gradient(to top, ${
-                          isEven ? "rgba(30,45,18,0.4)" : "rgba(30,45,18,0.5)"
-                        }, transparent 60%)`,
+                          isEven ? "rgba(30,45,18,0.5)" : "rgba(30,45,18,0.6)"
+                        }, transparent 50%)`,
                       }}
                     />
-                    <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6">
-                      <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/70">
+                    <div className="absolute bottom-5 left-5 sm:bottom-7 sm:left-7">
+                      <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-cream/60">
                         {cuisine.number} — {cuisine.name}
                       </span>
                     </div>

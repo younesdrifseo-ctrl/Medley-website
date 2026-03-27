@@ -55,19 +55,19 @@ export default function Countdown() {
   const units = Object.entries(timeLeft) as [string, number][];
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] uppercase text-cream/50">
+    <div className="flex flex-col items-center gap-4">
+      <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-cream/35">
         Ouverture dans
       </p>
-      <div className="flex items-center gap-2 sm:gap-3 md:gap-5">
+      <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
         {units.map(([label, value], i) => (
           <div key={label} className="flex flex-col items-center">
-            <div className="relative">
-              <span className="font-mono text-2xl sm:text-3xl md:text-5xl text-cream tabular-nums leading-none">
+            <div className="relative w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 flex items-center justify-center border border-cream/10 rounded-sm bg-cream/5 backdrop-blur-sm">
+              <span className="font-mono text-xl sm:text-2xl md:text-4xl text-cream tabular-nums leading-none">
                 {String(value).padStart(2, "0")}
               </span>
             </div>
-            <span className="font-mono text-[9px] sm:text-[10px] md:text-xs text-cream/40 uppercase tracking-wider mt-1.5">
+            <span className="font-mono text-[8px] sm:text-[9px] md:text-[10px] text-cream/30 uppercase tracking-[0.2em] mt-2">
               {label}
             </span>
             {i < units.length - 1 && (
