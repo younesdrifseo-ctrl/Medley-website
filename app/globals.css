@@ -16,69 +16,75 @@
   --font-mono: "DM Mono", monospace;
 }
 
-:root {
-  --cream: #F0EBE0;
-  --cream2: #E4DDCF;
-  --sage: #8B9A6B;
-  --sage2: #6B7A50;
-  --olive: #5A6B3A;
-  --forest: #3A4A28;
-  --deep: #1E2D12;
-  --gold: #B8A455;
-  --gold2: #D4B840;
-  --ink: #1C2010;
+/* All custom styles in @layer base so they don't override Tailwind utilities */
+@layer base {
+  :root {
+    --cream: #F0EBE0;
+    --cream2: #E4DDCF;
+    --sage: #8B9A6B;
+    --sage2: #6B7A50;
+    --olive: #5A6B3A;
+    --forest: #3A4A28;
+    --deep: #1E2D12;
+    --gold: #B8A455;
+    --gold2: #D4B840;
+    --ink: #1C2010;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--forest);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--olive);
+    color: var(--cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--gold2);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--cream2);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--sage);
+    border-radius: 3px;
+  }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Utilities in @layer utilities so they work alongside Tailwind */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+  .scroll-progress {
+    transform-origin: left;
+    will-change: transform;
+  }
 
-body {
-  background: var(--cream);
-  color: var(--forest);
-  font-family: var(--font-body);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-::selection {
-  background: var(--olive);
-  color: var(--cream);
-}
-
-/* Focus styles for accessibility */
-:focus-visible {
-  outline: 2px solid var(--gold2);
-  outline-offset: 2px;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--cream2);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--sage);
-  border-radius: 3px;
-}
-
-/* Hide scrollbar for horizontal scroll areas */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 /* Custom cursor - desktop only */
@@ -97,19 +103,6 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* Scroll progress bar */
-.scroll-progress {
-  transform-origin: left;
-  will-change: transform;
-}
-
-/* Safe area insets for iPhone notch */
-@supports (padding: env(safe-area-inset-bottom)) {
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
