@@ -29,6 +29,7 @@ export const HOURS = {
 export const CHEF = {
   name: "Mohamed Si",
   title: "Chef Cuisinier",
+  quote: "La cuisine, c'est l'art de transformer le simple en extraordinaire.",
   achievements: [
     { year: "2014", label: "Top Chef France — Saison 5" },
     { year: "2019", label: "Top Chef Middle East" },
@@ -60,7 +61,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/orient.png",
     image: "/assets/photos/tajine.jpg",
     dishes: ["Tajine d'agneau aux pruneaux", "Couscous royal", "Pastilla au poulet", "Briouates aux amandes"],
-    color: "var(--gold2)",
+    color: "#D4B840",
   },
   {
     id: "asian",
@@ -71,7 +72,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/asian.png",
     image: "/assets/photos/poke.jpg",
     dishes: ["Poke bowl saumon", "Bibimbap bœuf", "Gyozas maison", "Pad thaï crevettes"],
-    color: "var(--sage)",
+    color: "#8B9A6B",
   },
   {
     id: "brasserie",
@@ -82,7 +83,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/brasserie.png",
     image: "/assets/photos/boeuf.jpg",
     dishes: ["Côte de bœuf maturée", "Canard confit", "Tartare de bœuf", "Entrecôte sauce béarnaise"],
-    color: "var(--forest)",
+    color: "#3A4A28",
   },
   {
     id: "italy",
@@ -93,7 +94,18 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/italy.png",
     image: "/assets/photos/pizza.jpg",
     dishes: ["Pizza Margherita DOP", "Ravioli ricotta-épinards", "Risotto truffe", "Tiramisu maison"],
-    color: "var(--olive)",
+    color: "#5A6B3A",
+  },
+  {
+    id: "desserts",
+    name: "Desserts",
+    number: "05",
+    tagline: "La touche finale",
+    description: "Créations sucrées du Chef, finaliste du Championnat de France Desserts. Chaque bouchée est un art.",
+    icon: "/assets/icons/desserts.png",
+    image: "/assets/photos/dessert.jpg",
+    dishes: ["Soufflé au chocolat", "Tarte tatin revisitée", "Pavlova fruits exotiques", "Crème brûlée à la vanille"],
+    color: "#B8A455",
   },
 ];
 
@@ -113,6 +125,5 @@ export const NAV_LINKS = [
   { label: "Cuisines", href: "#cuisines" },
   { label: "Galerie", href: "#galerie" },
   { label: "Le Chef", href: "#chef" },
-  { label: "Réserver", href: "#reservation" },
   { label: "Infos", href: "#infos" },
 ];

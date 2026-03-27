@@ -9,23 +9,9 @@ import MobileMenu from "./MobileMenu";
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 60);
-
-    const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const el = document.getElementById(sections[i]);
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= 150) {
-          setActiveSection(`#${sections[i]}`);
-          return;
-        }
-      }
-    }
-    setActiveSection("");
+    setScrolled(window.scrollY > 80);
   }, []);
 
   useEffect(() => {
@@ -34,36 +20,30 @@ export default function Nav() {
   }, [handleScroll]);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled
-            ? "bg-deep/95 backdrop-blur-md py-3 shadow-lg"
-            : "bg-transparent py-4 md:py-5"
+            ? "bg-ink/80 backdrop-blur-xl py-3"
+            : "bg-transparent py-5 md:py-6"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="relative w-24 h-9 md:w-28 md:h-10 block flex-shrink-0">
+          <a href="#" className="relative w-20 h-8 sm:w-24 sm:h-9 block flex-shrink-0" data-cursor="Home">
             <Image
               src="/assets/logo/medley-logo.png"
               alt="MÉDLËY"
               fill
-              sizes="112px"
+              sizes="96px"
               className="object-contain"
               style={{ filter: "invert(1) brightness(1)", mixBlendMode: "screen" }}
               priority
@@ -71,25 +51,15 @@ export default function Nav() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-10">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={`font-body text-sm tracking-widest uppercase transition-colors duration-300 ${
-                  activeSection === link.href
-                    ? "text-gold2"
-                    : "text-cream/80 hover:text-gold2"
-                }`}
+                className="font-body text-[11px] tracking-[0.25em] uppercase text-cream/50 hover:text-cream/90 transition-colors duration-500"
+                data-cursor={link.label}
               >
                 {link.label}
-                {activeSection === link.href && (
-                  <motion.div
-                    className="h-px bg-gold2 mt-1"
-                    layoutId="navIndicator"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
               </a>
             ))}
           </div>
@@ -97,7 +67,8 @@ export default function Nav() {
           {/* CTA Desktop */}
           <a
             href="#reservation"
-            className="hidden lg:inline-flex items-center px-5 py-2 text-sm font-body font-medium tracking-wider uppercase bg-olive text-cream rounded-sm hover:bg-forest transition-colors duration-300"
+            className="hidden lg:inline-flex items-center px-6 py-2.5 font-body text-[10px] tracking-[0.25em] uppercase border border-cream/15 text-cream/60 hover:text-cream/90 hover:border-cream/30 transition-all duration-500"
+            data-cursor="Réserver"
           >
             Réserver
           </a>
@@ -110,18 +81,18 @@ export default function Nav() {
             aria-expanded={mobileOpen}
           >
             <motion.span
-              className="block w-6 h-0.5 bg-cream origin-center"
-              animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              className="block w-5 h-px bg-cream/70 origin-center"
+              animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
             <motion.span
-              className="block w-6 h-0.5 bg-cream"
+              className="block w-5 h-px bg-cream/70"
               animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.2 }}
             />
             <motion.span
-              className="block w-6 h-0.5 bg-cream origin-center"
-              animate={mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              className="block w-5 h-px bg-cream/70 origin-center"
+              animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
             />
           </button>

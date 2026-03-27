@@ -16,7 +16,6 @@
   --font-mono: "DM Mono", monospace;
 }
 
-/* All custom styles in @layer base so they don't override Tailwind utilities */
 @layer base {
   :root {
     --cream: #F0EBE0;
@@ -56,18 +55,23 @@
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--cream2);
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: var(--sage);
-    border-radius: 3px;
+    border-radius: 2px;
+  }
+
+  /* Day/Night mode transitions */
+  .night-mode ::-webkit-scrollbar-thumb {
+    background: var(--cream2);
+    opacity: 0.2;
   }
 }
 
-/* Utilities in @layer utilities so they work alongside Tailwind */
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -87,8 +91,8 @@
   }
 }
 
-/* Custom cursor - desktop only */
-@media (hover: hover) {
+/* Custom cursor - desktop only (hover:hover + pointer:fine) */
+@media (hover: hover) and (pointer: fine) {
   * {
     cursor: none !important;
   }
@@ -106,7 +110,7 @@
   }
 }
 
-/* Touch highlight removal */
+/* Touch devices */
 @media (hover: none) {
   * {
     -webkit-tap-highlight-color: transparent;

@@ -3,87 +3,114 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CHEF } from "@/lib/constants";
-import RevealOnScroll from "@/components/ui/RevealOnScroll";
 
 export default function Chef() {
   return (
-    <section id="chef" className="bg-deep py-24 sm:py-28 md:py-36 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
-          {/* Photo */}
-          <RevealOnScroll direction="left">
-            <motion.div
-              className="relative aspect-[3/4] rounded-sm overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-            >
-              <Image
-                src="/assets/photos/chef.jpg"
-                alt={`${CHEF.name}, ${CHEF.title}`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-deep/20 to-transparent" />
-              {/* Name overlay on mobile */}
-              <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 lg:hidden">
-                <p className="font-display italic text-2xl sm:text-3xl text-cream">{CHEF.name}</p>
-                <p className="font-display italic text-sm text-gold2">{CHEF.title}</p>
-              </div>
-            </motion.div>
-          </RevealOnScroll>
+    <section id="chef" className="relative">
+      {/* Full-screen photo with quote overlay */}
+      <div className="relative h-[80svh] sm:h-[90svh] overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <Image
+            src="/assets/photos/chef.jpg"
+            alt={`${CHEF.name}, ${CHEF.title}`}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
 
-          {/* Text */}
-          <div>
-            <RevealOnScroll>
-              <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-cream/30 block mb-3 sm:mb-4">
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-deep/60 via-transparent to-transparent" />
+
+        {/* Quote overlay - positioned at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 sm:px-8 lg:px-12 pb-16 sm:pb-20 md:pb-24">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <span className="font-mono text-[9px] tracking-[0.4em] uppercase text-cream/25 block mb-6">
                 Le Chef
               </span>
-            </RevealOnScroll>
+              <blockquote className="font-display italic text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-cream/80 font-light leading-snug max-w-3xl mb-6">
+                &ldquo;{CHEF.quote}&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-px bg-gold2/50" />
+                <p className="font-body text-sm text-gold2/70">
+                  {CHEF.name}, <span className="italic">{CHEF.title}</span>
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
 
-            <RevealOnScroll delay={0.1}>
-              <h2 className="font-display italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-cream mb-3">
+      {/* Bio section below */}
+      <div className="bg-deep py-20 sm:py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+            {/* Bio text */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="font-display italic text-4xl sm:text-5xl md:text-6xl text-cream font-light mb-4">
                 {CHEF.name}
               </h2>
-            </RevealOnScroll>
-
-            <RevealOnScroll delay={0.2}>
-              <p className="font-display italic text-lg sm:text-xl text-gold2 mb-4">
+              <p className="font-display italic text-base sm:text-lg text-gold2/80 mb-6">
                 {CHEF.title}
               </p>
-            </RevealOnScroll>
-
-            <RevealOnScroll delay={0.25}>
-              <div className="w-10 h-px bg-gold2/40 mb-6 sm:mb-8" />
-            </RevealOnScroll>
-
-            <RevealOnScroll delay={0.3}>
-              <p className="font-body text-sm sm:text-base leading-[1.8] text-cream/50 mb-10 sm:mb-14 max-w-md">
+              <div className="w-10 h-px bg-cream/10 mb-8" />
+              <p className="font-body text-sm sm:text-base leading-[1.9] text-cream/40 max-w-lg">
                 Révélé par Top Chef France, Mohamed Si a perfectionné son art à travers
                 les compétitions culinaires les plus prestigieuses. Chez MÉDLËY, il
-                réunit ses influences du monde entier en une seule adresse.
+                réunit ses influences du monde entier en une seule adresse — un voyage
+                culinaire unique entre Orient, Asie, Brasserie française, Italie et
+                créations sucrées d&apos;exception.
               </p>
-            </RevealOnScroll>
+            </motion.div>
 
-            {/* Timeline */}
-            <div className="relative pl-8 sm:pl-10 border-l border-cream/8">
+            {/* Achievements timeline */}
+            <motion.div
+              className="relative pl-8 border-l border-cream/8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               {CHEF.achievements.map((item, i) => (
-                <RevealOnScroll key={item.label} delay={0.4 + i * 0.1}>
-                  <div className="relative mb-6 sm:mb-8 last:mb-0">
-                    {/* Dot */}
-                    <div className="absolute -left-[calc(2rem+5px)] sm:-left-[calc(2.5rem+5px)] top-1 w-2.5 h-2.5 rounded-full bg-gold2/80 shadow-sm shadow-gold2/30" />
-                    {item.year && (
-                      <span className="font-mono text-[10px] sm:text-xs text-gold2/60 block mb-1.5">
-                        {item.year}
-                      </span>
-                    )}
-                    <p className="font-body text-sm sm:text-base text-cream/60">
-                      {item.label}
-                    </p>
-                  </div>
-                </RevealOnScroll>
+                <motion.div
+                  key={item.label}
+                  className="relative mb-8 last:mb-0"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+                >
+                  <div className="absolute -left-[calc(2rem+4px)] top-1.5 w-2 h-2 rounded-full bg-gold2/70" />
+                  {item.year && (
+                    <span className="font-mono text-[10px] text-gold2/50 block mb-1">
+                      {item.year}
+                    </span>
+                  )}
+                  <p className="font-body text-sm sm:text-base text-cream/55">
+                    {item.label}
+                  </p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

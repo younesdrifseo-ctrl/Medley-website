@@ -1,73 +1,112 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function Cursor() {
-  const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [label, setLabel] = useState("");
+  const [hovering, setHovering] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springX = useSpring(cursorX, { damping: 25, stiffness: 300 });
-  const springY = useSpring(cursorY, { damping: 25, stiffness: 300 });
+  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+  const x = useSpring(cursorX, springConfig);
+  const y = useSpring(cursorY, springConfig);
 
-  useEffect(() => {
-    // Only show on devices with hover capability
-    const hasHover = window.matchMedia("(hover: hover)").matches;
-    if (!hasHover) return;
-
-    setIsVisible(true);
-
-    const moveCursor = (e: MouseEvent) => {
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-    };
+      if (!visible) setVisible(true);
+    },
+    [cursorX, cursorY, visible]
+  );
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName === "A" ||
-        target.tagName === "BUTTON" ||
-        target.closest("a") ||
-        target.closest("button") ||
-        target.dataset.cursor === "pointer"
-      ) {
-        setIsHovering(true);
-      }
-    };
+  const handleMouseOver = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const interactive = target.closest("a, button, [data-cursor], input, select, textarea");
+    if (interactive) {
+      setHovering(true);
+      const cursorLabel = interactive.getAttribute("data-cursor");
+      setLabel(cursorLabel || "");
+    } else {
+      setHovering(false);
+      setLabel("");
+    }
+  }, []);
 
-    const handleMouseOut = () => {
-      setIsHovering(false);
-    };
+  const handleMouseLeave = useCallback(() => {
+    setVisible(false);
+  }, []);
 
-    window.addEventListener("mousemove", moveCursor);
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
+  useEffect(() => {
+    const hasPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!hasPointer) return;
+    setIsDesktop(true);
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+    document.documentElement.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
+      document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [cursorX, cursorY]);
+  }, [handleMouseMove, handleMouseOver, handleMouseLeave]);
 
-  if (!isVisible) return null;
+  if (!isDesktop) return null;
 
   return (
     <>
+      {/* Main dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-gold2 mix-blend-difference"
-        style={{
-          x: springX,
-          y: springY,
-          translateX: "-50%",
-          translateY: "-50%",
-          width: isHovering ? 48 : 12,
-          height: isHovering ? 48 : 12,
-          transition: "width 0.3s ease, height 0.3s ease",
+        className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
+        style={{ x, y }}
+        animate={{
+          opacity: visible ? 1 : 0,
+          scale: hovering ? 0 : 1,
         }}
-      />
+        transition={{ scale: { duration: 0.2 }, opacity: { duration: 0.15 } }}
+      >
+        <div className="w-2 h-2 -ml-1 -mt-1 rounded-full bg-cream" />
+      </motion.div>
+
+      {/* Outer ring / label */}
+      <motion.div
+        className="fixed top-0 left-0 z-[9999] pointer-events-none flex items-center justify-center"
+        style={{ x, y }}
+        animate={{
+          opacity: visible ? 1 : 0,
+          width: hovering ? (label ? 100 : 48) : 32,
+          height: hovering ? (label ? 100 : 48) : 32,
+          marginLeft: hovering ? (label ? -50 : -24) : -16,
+          marginTop: hovering ? (label ? -50 : -24) : -16,
+        }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div
+          className={`w-full h-full rounded-full border transition-colors duration-300 flex items-center justify-center ${
+            hovering
+              ? "border-gold2/50 bg-gold2/10 backdrop-blur-sm"
+              : "border-cream/15"
+          }`}
+        >
+          {label && hovering && (
+            <motion.span
+              className="font-mono text-[8px] tracking-[0.15em] uppercase text-cream/70"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              {label}
+            </motion.span>
+          )}
+        </div>
+      </motion.div>
     </>
   );
 }

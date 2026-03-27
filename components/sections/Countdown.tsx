@@ -28,25 +28,21 @@ export default function Countdown() {
   useEffect(() => {
     setMounted(true);
     setTimeLeft(getTimeLeft());
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft());
-    }, 1000);
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
     return () => clearInterval(timer);
   }, []);
 
   if (!mounted) {
     return (
-      <div className="flex items-center gap-2">
-        <p className="font-display italic text-lg text-gold2">
-          Ouverture le {RESTAURANT.openingLabel}
-        </p>
-      </div>
+      <p className="font-display italic text-base text-gold2/70">
+        Ouverture le {RESTAURANT.openingLabel}
+      </p>
     );
   }
 
   if (!timeLeft) {
     return (
-      <p className="font-display italic text-2xl text-gold2">
+      <p className="font-display italic text-xl text-gold2">
         Maintenant ouvert
       </p>
     );
@@ -55,27 +51,17 @@ export default function Countdown() {
   const units = Object.entries(timeLeft) as [string, number][];
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-cream/35">
-        Ouverture dans
-      </p>
-      <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
-        {units.map(([label, value], i) => (
-          <div key={label} className="flex flex-col items-center">
-            <div className="relative w-14 sm:w-16 md:w-20 h-14 sm:h-16 md:h-20 flex items-center justify-center border border-cream/10 rounded-sm bg-cream/5 backdrop-blur-sm">
-              <span className="font-mono text-xl sm:text-2xl md:text-4xl text-cream tabular-nums leading-none">
-                {String(value).padStart(2, "0")}
-              </span>
-            </div>
-            <span className="font-mono text-[8px] sm:text-[9px] md:text-[10px] text-cream/30 uppercase tracking-[0.2em] mt-2">
-              {label}
-            </span>
-            {i < units.length - 1 && (
-              <span className="sr-only">,</span>
-            )}
-          </div>
-        ))}
-      </div>
+    <div className="flex items-center gap-4 sm:gap-6">
+      {units.map(([label, value]) => (
+        <div key={label} className="flex flex-col items-center gap-1.5">
+          <span className="font-mono text-lg sm:text-xl md:text-2xl text-cream/70 tabular-nums">
+            {String(value).padStart(2, "0")}
+          </span>
+          <span className="font-mono text-[7px] sm:text-[8px] text-cream/25 uppercase tracking-[0.2em]">
+            {label}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
