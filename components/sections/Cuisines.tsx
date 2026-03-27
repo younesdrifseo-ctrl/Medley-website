@@ -34,7 +34,7 @@ export default function Cuisines() {
           {CUISINES.map((cuisine, idx) => (
             <motion.div
               key={cuisine.id}
-              className={`relative overflow-hidden cursor-pointer group ${
+              className={`relative overflow-hidden cursor-pointer group rounded-sm ${
                 idx >= 3 ? "col-span-1" : ""
               } ${CUISINES.length === 5 && idx === 3 ? "sm:col-start-1" : ""}`}
               style={{ aspectRatio: idx < 3 ? "3/4" : "3/4" }}

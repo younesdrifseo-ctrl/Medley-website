@@ -61,7 +61,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/orient.png",
     image: "/assets/photos/tajine.jpg",
     dishes: ["Tajine d'agneau aux pruneaux", "Couscous royal", "Pastilla au poulet", "Briouates aux amandes"],
-    color: "#D4B840",
+    color: "#C8A96E",
   },
   {
     id: "asian",
@@ -72,7 +72,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/asian.png",
     image: "/assets/photos/poke.jpg",
     dishes: ["Poke bowl saumon", "Bibimbap bœuf", "Gyozas maison", "Pad thaï crevettes"],
-    color: "#8B9A6B",
+    color: "#7A8E6D",
   },
   {
     id: "brasserie",
@@ -83,7 +83,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/brasserie.png",
     image: "/assets/photos/boeuf.jpg",
     dishes: ["Côte de bœuf maturée", "Canard confit", "Tartare de bœuf", "Entrecôte sauce béarnaise"],
-    color: "#3A4A28",
+    color: "#8B4513",
   },
   {
     id: "italy",
@@ -94,7 +94,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/italy.png",
     image: "/assets/photos/pizza.jpg",
     dishes: ["Pizza Margherita DOP", "Ravioli ricotta-épinards", "Risotto truffe", "Tiramisu maison"],
-    color: "#5A6B3A",
+    color: "#C25E3A",
   },
   {
     id: "desserts",
@@ -105,7 +105,7 @@ export const CUISINES: Cuisine[] = [
     icon: "/assets/icons/desserts.png",
     image: "/assets/photos/dessert.jpg",
     dishes: ["Soufflé au chocolat", "Tarte tatin revisitée", "Pavlova fruits exotiques", "Crème brûlée à la vanille"],
-    color: "#B8A455",
+    color: "#D4B978",
   },
 ];
 
