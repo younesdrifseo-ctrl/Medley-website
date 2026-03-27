@@ -1,10 +1,9 @@
 [build]
   command = "npm run build"
   publish = "out"
-  ignore = "false"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
   NEXT_PRIVATE_STANDALONE = "false"
 
